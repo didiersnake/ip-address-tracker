@@ -1,8 +1,11 @@
+import AddressInput from "./components/AddressInput";
+import IpMap from "./components/IpMap";
 
 function App() {
   return (
     <div className="">
-      Hello
+      <AddressInput />
+      <IpMap />
     </div>
   );
 }
