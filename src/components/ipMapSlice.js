@@ -1,39 +1,34 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice,  } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  status: "",
-  address: {},
+  status: "yo",
+  address: { name: "ip" },
 };
 
 const apiKey = "d12d05cc54924cc3a19681153d567d51";
-const apiUrl = "https://ipgeolocation.abstractapi.com/v1/";
+let ipv4 = "192.168.8.101";
+const apiUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ipv4} `;
+const locationUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address = ${ipv4}`;
 
-export const getUserLocation = createAsyncThunk("ip/ipAddress", async () => {
-    //fetch user location with 
-  const response = await axios.get(apiUrl, { apiKey: apiKey });
-  console.log(response.data);
-  return response.data;
-});
+export const getUserLocation = async () => {
+  //fetch user location with
+  try {
+    const response = await axios.get(apiUrl);
+    console.log(response.data);
+    return { ...response.data };
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const ipMapSlice = createSlice({
-  name: "ipLocation",
   initialState,
+  name: "location",
   reducers: {},
-  extraReducers(builder) {
-    builder
-      .addCase(getUserLocation.pending, (state, action) => {
-        state.status = "loading";
-      })
-      .addCase(getUserLocation.fulfilled, (state, action) => {
-        // get loactions details
-      })
-      .addCase(getUserLocation.rejected, (state, ation) => {
-        state.status = "failed";
-      });
-  },
 });
 
-export const ipDetails = (state) => state.ipLocation.address
-export const ipstatus = state => state.ipLocation.status
+export const details = (state) => state.address;
+export const ipstatus = (state) => state.status;
+
 export default ipMapSlice.reducer;

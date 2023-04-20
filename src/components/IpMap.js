@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css"
 import "./ipMap.css"
 import { Icon } from 'leaflet'
 import { useSelector } from 'react-redux'
-import { ipDetails, ipstatus } from './ipMapSlice'
+import { details, ipstatus } from './ipMapSlice'
 
 
 const DEFAULT_LONGITUDE = 51.505;
@@ -12,8 +12,9 @@ const DEFAULT_LATITUDE = -0.09;
 
 const IpMap = () => {
 
-    const ip = useSelector(ipDetails)
+    const ip = useSelector(details)
     const status = useSelector(ipstatus)
+    console.log(status);
     const [latitude, setLatitude] = useState("")
     const [longitude, setlongitude] = useState("")
 

@@ -3,7 +3,6 @@ import ipMapSlice from "../components/ipMapSlice"
 
 export const store = configureStore({
     reducer: {
-        
-        ipMap: ipMapSlice,
+        map: ipMapSlice,
     }
 })
