@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import {store} from "./app/store"
 import { getIpLocation } from './components/ipMapSlice';
 
-store.dispatch(getIpLocation())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

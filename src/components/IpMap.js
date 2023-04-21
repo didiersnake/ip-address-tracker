@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./ipMap.css";
-import { Icon } from "leaflet";
+import L from "leaflet";
+import icon from "../images/icon-location.svg"
 import { useSelector } from "react-redux";
 import { details, ipstatus } from "./ipMapSlice";
 import IpStateData from "./IpStateData";
@@ -18,9 +19,9 @@ const IpMap = () => {
   const [longitude, setlongitude] = useState(ipData ? ipData.longitude : null);
 
     //from leaflet icon class
-  const customIcon = new Icon({
-    iconUrl: require("../images/icon-location.svg"),
-    iconSize: [30, 30], //size of icon
+  const customIcon = new L.icon({
+    iconUrl: icon,
+    iconSize: [25, 30], //size of icon
   });
 
   function LocationMarker() {

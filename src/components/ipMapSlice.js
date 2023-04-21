@@ -7,21 +7,21 @@ const initialState = {
 };
 
 const apiKey = "d12d05cc54924cc3a19681153d567d51";
-let ipv4 = "";
+
 const fields = "ip_address,country,city,timezone,connection,longitude,latitude"
 export const getUrl = (ip) => {
-  return `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ip}&fields=${fields}`;
+  return `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address=${ip}&fields=${fields}`;
 };
 
 /* 
-const apiUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ipv4} `;
-const locationUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address = ${ipv4}`;
+const apiUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address=${ipv4}&fields=${fields} `;
+const locationUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&`;
  */
 
-export const getIpLocation = createAsyncThunk("ip/fetchIp", async () => {
+export const getIpLocation = createAsyncThunk("ip/fetchIp", async (ip) => {
   //fetch IP location 
   try {
-    const response = await axios.get(getUrl(ipv4));
+    const response = await axios.get(getUrl(ip));
     return { ...response.data };
   } catch (error) {
     console.log(error);

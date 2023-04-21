@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Arrow from "../images/icon-arrow.svg"
+import { getIpLocation } from './ipMapSlice'
 
 const AddressInput = () => {
     const [address, setAddress] = useState("")
@@ -11,7 +12,7 @@ const AddressInput = () => {
     const dispatch = useDispatch()
 
     const locate = () => {
-
+        dispatch(getIpLocation(address))
         console.log("Hello");
     }
 
