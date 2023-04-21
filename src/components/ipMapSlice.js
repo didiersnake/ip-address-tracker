@@ -12,13 +12,14 @@ const fields = "ip_address,country,city,timezone,connection,longitude,latitude"
 export const getUrl = (ip) => {
   return `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ip}&fields=${fields}`;
 };
+
 /* 
 const apiUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ipv4} `;
 const locationUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address = ${ipv4}`;
  */
 
 export const getIpLocation = createAsyncThunk("ip/fetchIp", async () => {
-  //fetch user location 
+  //fetch IP location 
   try {
     const response = await axios.get(getUrl(ipv4));
     return { ...response.data };

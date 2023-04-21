@@ -11,23 +11,26 @@ const AddressInput = () => {
     const dispatch = useDispatch()
 
     const locate = () => {
-        
+
         console.log("Hello");
     }
 
   return (
-    <div className="bg-[url(./images/pattern-bg-desktop.png)] h-[40vh]">
-      <h2 className="text-lg text-white">Ip Address Tracker</h2>
-      <div className='flex'>
+    <div className="bg-[url(./images/pattern-bg-desktop.png)] h-[35vh] md:h-[40vh] flex items-center flex-col gap-3 pt-8">
+      <h2 className="text-lg font-semibold text-white">IP Address Tracker</h2>
+      <div className="flex">
         <input
           name="ip-address"
           value={address}
           onChange={handleTextInput}
           placeholder="Search for any IP address or domain"
-          className="rounded-l-md"
+          className="rounded-l-xl p-2 md:w-[450px] focus:outline-none hover:cursor-pointer"
         />
-        <div className='p-2 bg-black rounded-r-md' onClick={locate}>
-            <img src={Arrow} alt='arrow'/>
+        <div
+          className="p-4 bg-black rounded-r-xl hover:cursor-pointer"
+          onClick={locate}
+        >
+          <img src={Arrow} alt="arrow" />
         </div>
       </div>
     </div>

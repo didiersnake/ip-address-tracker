@@ -1,5 +1,6 @@
 import AddressInput from "./components/AddressInput";
 import IpMap from "./components/IpMap";
+import IpStateData from "./components/IpStateData";
 
 function App() {
   return (
