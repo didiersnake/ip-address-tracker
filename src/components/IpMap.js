@@ -12,11 +12,17 @@ const DEFAULT_LATITUDE = -0.09;
 
 const IpMap = () => {
 
-    const ip = useSelector(details)
+    const ipData = useSelector(details)
     const status = useSelector(ipstatus)
-    console.log(status);
-    const [latitude, setLatitude] = useState("")
-    const [longitude, setlongitude] = useState("")
+    console.log(ipData);
+    const [latitude, setLatitude] = useState(ipData?ipData.latitude: null)
+    const [longitude, setlongitude] = useState(ipData ?ipData.longitude : null)
+
+
+     const customIcon = new Icon({
+       iconUrl: require("../images/icon-location.svg"),
+       iconSize: [30, 30], //size of icon
+     });
 
     function LocationMarker() {
         const [position, setPosition] = useState(null)
@@ -29,17 +35,17 @@ const IpMap = () => {
                 map.flyTo(e.latlng, map.getZoom())
             },
         })
-        return position === null ? null : (
+        return ipData ? (
+          <Marker position={[longitude, latitude]} icon={customIcon}>
+            <Popup>You are here</Popup>
+          </Marker>
+        ) : position === null ? null : (
           <Marker position={position} icon={customIcon}>
             <Popup>You are here</Popup>
           </Marker>
         );
     }
 
-    const customIcon = new Icon({
-      iconUrl: require("../images/icon-location.svg"),
-      iconSize: [30, 30], //size of icon
-    });
     
   return (
     <MapContainer center={[DEFAULT_LONGITUDE, DEFAULT_LATITUDE]} zoom={13} scrollWheelZoom={false}>

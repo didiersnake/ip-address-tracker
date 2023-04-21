@@ -7,19 +7,20 @@ const initialState = {
 };
 
 const apiKey = "d12d05cc54924cc3a19681153d567d51";
-let ipv4 = "192.168.8.101";
+let ipv4 = "";
+const fields = "ip_address,country,city,timezone,connection,longitude,latitude"
 export const getUrl = (ip) => {
-  return `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ip}`;
+  return `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ip}&fields=${fields}`;
 };
-
+/* 
 const apiUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&${ipv4} `;
 const locationUrl = `https://ipgeolocation.abstractapi.com/v1/?api_key=${apiKey}&ip_address = ${ipv4}`;
+ */
 
-export const getUserLocation = createAsyncThunk("ip/fetchIp", async () => {
+export const getIpLocation = createAsyncThunk("ip/fetchIp", async () => {
   //fetch user location 
   try {
     const response = await axios.get(getUrl(ipv4));
-    console.log(response.data);
     return { ...response.data };
   } catch (error) {
     console.log(error);
@@ -32,12 +33,12 @@ const ipMapSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getUserLocation.pending, (state, action) => {})
-      .addCase(getUserLocation.fulfilled, (state, action) => {
+      .addCase(getIpLocation.pending, (state, action) => {})
+      .addCase(getIpLocation.fulfilled, (state, action) => {
         state.address = action.payload;
         console.log(state.address);
       })
-      .addCase(getUserLocation.rejected, (state, action) => {
+      .addCase(getIpLocation.rejected, (state, action) => {
         console.log(action.error.message);
       });
   },
