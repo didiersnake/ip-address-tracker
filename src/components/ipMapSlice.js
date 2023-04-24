@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  status: "yo",
-  address: {},
+  userAddress: {},
 };
 
 const apiKey = "d12d05cc54924cc3a19681153d567d51";
@@ -28,7 +27,7 @@ export const getIpLocation = createAsyncThunk("ip/fetchIp", async (ip) => {
   }
 });
 
-const ipMapSlice = createSlice({
+export const ipMapSlice = createSlice({
   initialState,
   name: "location",
   reducers: {},
@@ -36,7 +35,7 @@ const ipMapSlice = createSlice({
     builder
       .addCase(getIpLocation.pending, (state, action) => {})
       .addCase(getIpLocation.fulfilled, (state, action) => {
-        state.address = action.payload;
+        state.userAddress = action.payload;
         console.log(state.address);
       })
       .addCase(getIpLocation.rejected, (state, action) => {
@@ -45,8 +44,5 @@ const ipMapSlice = createSlice({
   },
 });
 
-export const { locateUser } = ipMapSlice.actions;
-export const details = (state) => state.address;
-export const ipstatus = (state) => state.status;
-
+export const adress = state => state.location.userAddress;
 export default ipMapSlice.reducer;
